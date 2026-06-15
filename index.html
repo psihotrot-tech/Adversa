@@ -57,6 +57,33 @@ body.sr .sr-content{display:block}
   mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
   opacity:.5}
 .hero-inner{position:relative;z-index:1}
+
+/* ── CANVAS VISUAL ── */
+.hero-canvas-wrap{
+  width:100%;
+  margin-bottom:48px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+#heroCanvas{
+  display:block;
+  width:100%;
+  max-width:900px;
+  height:320px;
+  cursor:grab;
+  border-radius:20px;
+}
+#heroCanvas:active{cursor:grabbing}
+.canvas-hint{
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  color:var(--ink3);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--blue-light);border:1px solid #bfdbfe;border-radius:100px;font-family:'Space Mono',monospace;font-size:11px;color:var(--blue);margin-bottom:28px;letter-spacing:.04em}
 .hero-badge::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
@@ -89,46 +116,29 @@ body.sr .sr-content{display:block}
 
 /* SECTORS */
 .sectors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-
-/* AI sector - blue tech */
 .sector-card{border-radius:var(--radius-lg);border:1px solid var(--line);padding:40px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
 .sector-card:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,.08)}
-
 .sc-ai{background:linear-gradient(135deg,#f0f7ff 0%,#e8f2ff 50%,#f5f0ff 100%)}
 .sc-ai .sc-icon-bg{background:linear-gradient(135deg,#2563eb,#7c3aed)}
 .sc-ai .sc-accent{color:var(--blue)}
 .sc-ai .sc-tag{background:#dbeafe;color:#1d4ed8}
-
 .sc-video{background:linear-gradient(135deg,#fff7f0 0%,#fff0e8 50%,#fef9f0 100%)}
 .sc-video .sc-icon-bg{background:linear-gradient(135deg,#ea580c,#f59e0b)}
 .sc-video .sc-accent{color:var(--orange)}
 .sc-video .sc-tag{background:#fed7aa;color:#9a3412}
-
 .sc-analytics{background:linear-gradient(135deg,#f0fdf9 0%,#e8faf5 50%,#f0fffe 100%)}
 .sc-analytics .sc-icon-bg{background:linear-gradient(135deg,#0d9488,#0891b2)}
 .sc-analytics .sc-accent{color:var(--teal)}
 .sc-analytics .sc-tag{background:#99f6e4;color:#115e59}
-
 .sc-product{background:linear-gradient(135deg,#fdf4ff 0%,#f5f0ff 50%,#faf0ff 100%)}
 .sc-product .sc-icon-bg{background:linear-gradient(135deg,#7c3aed,#a855f7)}
 .sc-product .sc-accent{color:var(--purple)}
 .sc-product .sc-tag{background:#e9d5ff;color:#6b21a8}
-
-/* bg patterns per sector */
-.sc-ai::before{content:'';position:absolute;right:-20px;top:-20px;width:180px;height:180px;
-  background-image:repeating-linear-gradient(0deg,#2563eb18 0,#2563eb18 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#2563eb18 0,#2563eb18 1px,transparent 0,transparent 50%);
-  background-size:16px 16px;border-radius:50%;opacity:.6}
-.sc-video::before{content:'';position:absolute;right:-30px;top:-30px;width:200px;height:200px;
-  background:conic-gradient(from 0deg,transparent 60deg,#ea580c18 60deg,#ea580c18 120deg,transparent 120deg,transparent 180deg,#f59e0b18 180deg,#f59e0b18 240deg,transparent 240deg);
-  border-radius:50%;opacity:.7}
-.sc-analytics::before{content:'';position:absolute;right:-10px;top:20px;width:160px;height:160px;
-  background-image:repeating-linear-gradient(45deg,#0d948818 0,#0d948818 1px,transparent 0,transparent 10px);
-  background-size:14px 14px;opacity:.5}
-.sc-product::before{content:'';position:absolute;right:-20px;top:-20px;width:200px;height:200px;
-  background:radial-gradient(circle,#7c3aed22 0%,transparent 60%),radial-gradient(circle at 80% 20%,#a855f718 0%,transparent 50%);opacity:.8}
-
+.sc-ai::before{content:'';position:absolute;right:-20px;top:-20px;width:180px;height:180px;background-image:repeating-linear-gradient(0deg,#2563eb18 0,#2563eb18 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#2563eb18 0,#2563eb18 1px,transparent 0,transparent 50%);background-size:16px 16px;border-radius:50%;opacity:.6}
+.sc-video::before{content:'';position:absolute;right:-30px;top:-30px;width:200px;height:200px;background:conic-gradient(from 0deg,transparent 60deg,#ea580c18 60deg,#ea580c18 120deg,transparent 120deg,transparent 180deg,#f59e0b18 180deg,#f59e0b18 240deg,transparent 240deg);border-radius:50%;opacity:.7}
+.sc-analytics::before{content:'';position:absolute;right:-10px;top:20px;width:160px;height:160px;background-image:repeating-linear-gradient(45deg,#0d948818 0,#0d948818 1px,transparent 0,transparent 10px);background-size:14px 14px;opacity:.5}
+.sc-product::before{content:'';position:absolute;right:-20px;top:-20px;width:200px;height:200px;background:radial-gradient(circle,#7c3aed22 0%,transparent 60%),radial-gradient(circle at 80% 20%,#a855f718 0%,transparent 50%);opacity:.8}
 .sc-num{font-family:'Space Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:.12em;margin-bottom:20px;opacity:.7}
-.sc-icon-wrap{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .sc-icon-bg{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center}
 .sc-icon-bg svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .sc-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;padding:3px 10px;border-radius:100px;margin-bottom:14px;letter-spacing:.06em}
@@ -207,6 +217,7 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
   .video-section{padding:80px 20px}
   .why-section{padding:80px 20px}
   footer{padding:20px}
+  #heroCanvas{height:220px}
 }
 </style>
 </head>
@@ -230,10 +241,20 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
 
 <div class="hero-grid-bg"></div>
 
+<!-- ═══ SHARED CANVAS (jedan, iznad oba hero bloka) ═══ -->
+<div style="padding-top:60px;background:var(--bg);position:relative;z-index:1;">
+  <div style="max-width:1200px;margin:0 auto;padding:60px 48px 0;">
+    <div class="hero-canvas-wrap">
+      <canvas id="heroCanvas"></canvas>
+      <span class="canvas-hint">drag to rotate · povuci da rotiraš</span>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ ENGLISH ═══ -->
 <div class="en-content">
 
-<div class="hero">
+<div class="hero" style="padding-top:40px;">
   <div class="hero-inner">
     <div class="hero-badge">AI-Powered Digital Agency · Est. 2026</div>
     <h1 class="hero-title">We build AI products<br>people actually <em>use.</em></h1>
@@ -283,7 +304,6 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
     <div class="section-title">Four ways to grow<br>with <em>AI.</em></div>
   </div>
   <div class="sectors-grid">
-
     <div class="sector-card sc-ai">
       <div class="sc-num">01 / 04</div>
       <div class="sc-icon-bg"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
@@ -298,7 +318,6 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
         <div class="sc-svc">WhatsApp & web integration</div>
       </div>
     </div>
-
     <div class="sector-card sc-video">
       <div class="sc-num">02 / 04</div>
       <div class="sc-icon-bg"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
@@ -313,7 +332,6 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
         <div class="sc-svc">Brand storytelling</div>
       </div>
     </div>
-
     <div class="sector-card sc-analytics">
       <div class="sc-num">03 / 04</div>
       <div class="sc-icon-bg"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
@@ -328,7 +346,6 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
         <div class="sc-svc">Excel & data integration</div>
       </div>
     </div>
-
     <div class="sector-card sc-product">
       <div class="sc-num">04 / 04</div>
       <div class="sc-icon-bg"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
@@ -343,7 +360,6 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
         <div class="sc-svc">Behavioral analysis systems</div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -462,7 +478,7 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
 <!-- ═══ SRPSKI ═══ -->
 <div class="sr-content">
 
-<div class="hero">
+<div class="hero" style="padding-top:40px;">
   <div class="hero-inner">
     <div class="hero-badge">AI digitalna agencija · Osn. 2026</div>
     <h1 class="hero-title">Gradimo AI produkte<br>koje ljudi zaista <em>koriste.</em></h1>
@@ -509,7 +525,7 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
 <div class="section">
   <div class="section-header">
     <div class="eyebrow">Naši sektori</div>
-    <div class="section-title">Četiri načina da rasteš<br>uz <em>AI.</em></div>
+    <div class="section-title">Četiri načina da rastuješ<br>uz <em>AI.</em></div>
   </div>
   <div class="sectors-grid">
     <div class="sector-card sc-ai">
@@ -560,7 +576,7 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
       <div style="height:16px"></div>
       <span class="sc-tag">AI alati po meri</span>
       <div class="sc-name">Adversa <span class="sc-accent">Product</span></div>
-      <p class="sc-desc">Web aplikacije napravljene za vaš specifičan problem. Bihejvioralno utemeljeno, end-to-end isporuka — od SaaS platformi do internih poslovnih alata.</p>
+      <p class="sc-desc">Web aplikacije napravljene za vaš specifičan problem. Psihološki informisano, end-to-end isporuka — od SaaS platformi do internih poslovnih alata.</p>
       <div class="sc-services">
         <div class="sc-svc">Web aplikacije po meri</div>
         <div class="sc-svc">Alati za analizu klijenata</div>
@@ -633,18 +649,18 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
     <div class="why-grid">
       <div class="why-item">
         <div class="why-num">01</div>
-        <div class="why-title">Psihološki zasnovano</div>
-        <p class="why-desc">Svaki alat dizajniran je u skladu sa tim kako ljudi zaista misle i ponašaju se. To je ono što nas izdvaja.</p>
+        <div class="why-title">Psihološki informisano</div>
+        <p class="why-desc">Svaki alat dizajniran je oko toga kako ljudi zaista misle i ponašaju se. To je redak spoj u digitalnim agencijama.</p>
       </div>
       <div class="why-item">
         <div class="why-num">02</div>
-        <div class="why-title">Praktično i vidljivo, ne teorijski</div>
-        <p class="why-desc">Svaka usluga - referentni projekat. Ne prodajemo koncepte — pokazujemo rezultate koje možete proveriti odmah.</p>
+        <div class="why-title">Dokazano, ne teorijsko</div>
+        <p class="why-desc">Svaka usluga ima živ referentni projekat. Ne prodajemo koncepte — pokazujemo rezultate koje možete otvoriti odmah.</p>
       </div>
       <div class="why-item">
         <div class="why-num">03</div>
         <div class="why-title">Brzo i efikasno</div>
-        <p class="why-desc">Bez overhead-a. AI nam omogućava da radimo brzo — i tu efikasnost prenosimo klijentima.</p>
+        <p class="why-desc">Nema agencijskog overhead-a. AI nam omogućava da radimo brzo — i tu efikasnost prenosimo klijentima.</p>
       </div>
     </div>
   </div>
@@ -655,7 +671,7 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
   <div>
     <div class="eyebrow">Pokreni projekat</div>
     <div class="section-title" style="margin-bottom:16px">Hajde da napravimo<br>nešto <em>stvarno.</em></div>
-    <p style="font-size:15px;color:var(--ink2);line-height:1.75">Recite nam šta vam treba. Mi ćemo reći šta je moguće i koliko brzo možemo to da isporučimo. Prva konsultacija je uvek besplatna.</p>
+    <p style="font-size:15px;color:var(--ink2);line-height:1.75">Recite nam šta vam treba. Mi ćemo reći šta je moguće i koliko brzo možemo da isporučimo. Prva konsultacija je uvek besplatna.</p>
   </div>
   <div class="contact-card">
     <div class="contact-item">
@@ -664,7 +680,7 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
     </div>
     <div class="contact-divider"></div>
     <div class="contact-item">
-      <label>Telefon / Viber</label>
+      <label>Telefon / WhatsApp</label>
       <a href="tel:+381611050945">+381 61 105 0945</a>
     </div>
     <div class="contact-divider"></div>
@@ -684,6 +700,7 @@ footer p{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink3)}
 </div><!-- /sr -->
 
 <script>
+/* ── LANG SWITCH ── */
 function setLang(lang){
   document.body.className=lang;
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
@@ -694,6 +711,210 @@ function setLang(lang){
     else{l.style.display=l.classList.contains('en-content')?'block':'none';}
   });
 }
+
+/* ── 3D CANVAS ANIMATION (NFC version) ── */
+(function(){
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize(){
+    const w = Math.min(canvas.parentElement.offsetWidth, 1200);
+    canvas.width  = w * devicePixelRatio;
+    canvas.height = 340 * devicePixelRatio;
+    canvas.style.width  = w + 'px';
+    canvas.style.height = '340px';
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    W = w; H = 340;
+  }
+  let W, H;
+  resize();
+  window.addEventListener('resize', ()=>{ ctx.setTransform(1,0,0,1,0,0); resize(); });
+
+  const BLUE   = '#2563eb';
+  const PURPLE = '#7c3aed';
+  const TEAL   = '#0d9488';
+  const ORANGE = '#ea580c';
+  const PALETTE = [BLUE, PURPLE, TEAL, ORANGE];
+
+  let rotX =  0.18;
+  let rotY =  0;
+  let velX =  0;
+  let velY =  0.008;
+  let dragging = false;
+  let lastX = 0, lastY = 0;
+
+  const WORD = 'ADVERSA';
+  const RADIUS = 90;
+  const TRAIL_COUNT = 8;
+  const trailFrames = [];
+
+  const PARTICLE_N = 28;
+  const particles = Array.from({length: PARTICLE_N}, (_,i)=>{
+    const angle = (i / PARTICLE_N) * Math.PI * 2;
+    const r = RADIUS + 30 + Math.random() * 40;
+    return {
+      angle, r,
+      y: (Math.random() - .5) * 60,
+      vy: (Math.random() - .5) * 0.18,
+      speed: 0.003 + Math.random() * 0.006,
+      size: 1.5 + Math.random() * 2.5,
+      color: PALETTE[Math.floor(Math.random()*4)],
+      opacity: 0.3 + Math.random() * 0.5
+    };
+  });
+
+  const RING_N = 80;
+  const RING_R = RADIUS + 18;
+
+  const FOV = 340;
+  function project(x3, y3, z3){
+    const z = z3 + FOV;
+    const scale = FOV / z;
+    return { x: W/2 + x3 * scale, y: H/2 + y3 * scale, scale, z: z3 };
+  }
+  function rotateY(x, z, a){ return { x: x*Math.cos(a) - z*Math.sin(a), z: x*Math.sin(a) + z*Math.cos(a) }; }
+  function rotateX(y, z, a){ return { y: y*Math.cos(a) - z*Math.sin(a), z: y*Math.sin(a) + z*Math.cos(a) }; }
+  function transform(px, py, pz){
+    let ry = rotateY(px, pz, rotY);
+    let rx = rotateX(py, ry.z, rotX);
+    return project(ry.x, rx.y, rx.z);
+  }
+
+  const OFF = document.createElement('canvas');
+  OFF.width  = 600; OFF.height = 80;
+  const octx = OFF.getContext('2d');
+  octx.fillStyle = '#fff';
+  octx.font = `700 52px "Space Grotesk", sans-serif`;
+  octx.letterSpacing = '4px';
+  octx.textBaseline = 'middle';
+  octx.fillText(WORD, 10, 40);
+
+  const TEXT_POINTS = [];
+  const imgData = octx.getImageData(0, 0, OFF.width, OFF.height);
+  let minX = OFF.width, maxX = 0, minY = OFF.height, maxY = 0;
+  for(let y=0; y<OFF.height; y++){
+    for(let x=0; x<OFF.width; x++){
+      if(imgData.data[(y*OFF.width+x)*4+3] > 128){
+        if(x<minX) minX=x; if(x>maxX) maxX=x;
+        if(y<minY) minY=y; if(y>maxY) maxY=y;
+      }
+    }
+  }
+  const TW = maxX - minX;
+  const TH = maxY - minY;
+  const STEP = 4;
+  for(let y=minY; y<=maxY; y+=STEP){
+    for(let x=minX; x<=maxX; x+=STEP){
+      const a = imgData.data[(y*OFF.width+x)*4+3];
+      if(a > 100){
+        const nx = (x - minX) / TW;
+        const ny = (y - minY) / TH;
+        const angle = (nx - 0.5) * Math.PI * 1.35;
+        const p3x = RADIUS * Math.sin(angle);
+        const p3z = RADIUS * Math.cos(angle);
+        const p3y = (ny - 0.5) * 70;
+        const ci = Math.floor(nx * PALETTE.length);
+        TEXT_POINTS.push({ x: p3x, y: p3y, z: p3z, color: PALETTE[Math.min(ci, PALETTE.length-1)], nx });
+      }
+    }
+  }
+
+  function drawOrbitRing(opacity){
+    ctx.beginPath();
+    let first = true;
+    for(let i=0; i<=RING_N; i++){
+      const a = (i/RING_N) * Math.PI * 2;
+      const p = transform(RING_R * Math.sin(a), 0, RING_R * Math.cos(a));
+      if(first){ ctx.moveTo(p.x, p.y); first=false; } else ctx.lineTo(p.x, p.y);
+    }
+    ctx.strokeStyle = `rgba(37,99,235,${opacity * 0.25})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    const top = transform(0, 0, RING_R);
+    ctx.beginPath(); ctx.arc(top.x, top.y, 3, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(37,99,235,${opacity * 0.7})`; ctx.fill();
+  }
+
+  function drawParticles(opacity){
+    for(const p of particles){
+      const pt = transform(p.r * Math.sin(p.angle), p.y, p.r * Math.cos(p.angle));
+      const depthFade = (pt.scale * 0.8);
+      ctx.beginPath(); ctx.arc(pt.x, pt.y, p.size * depthFade, 0, Math.PI*2);
+      ctx.fillStyle = p.color + Math.round(p.opacity * opacity * 255).toString(16).padStart(2,'0');
+      ctx.fill();
+    }
+  }
+
+  function drawTextPoints(opacity){
+    const projected = TEXT_POINTS.map(p => {
+      let ry = rotateY(p.x, p.z, rotY);
+      let rx = rotateX(p.y, ry.z, rotX);
+      const pt = project(ry.x, rx.y, rx.z);
+      return { pt, color: p.color, nx: p.nx };
+    });
+    projected.sort((a,b) => a.pt.z - b.pt.z);
+    for(const { pt, color } of projected){
+      const depth = Math.max(0, Math.min(1, (pt.z + RADIUS*1.2) / (RADIUS*2.4)));
+      const alpha = depth * opacity;
+      const size  = Math.max(0.8, pt.scale * 2.2);
+      ctx.beginPath(); ctx.arc(pt.x, pt.y, size, 0, Math.PI*2);
+      ctx.fillStyle = color + Math.round(alpha * 255).toString(16).padStart(2,'0');
+      ctx.fill();
+    }
+  }
+
+  let t = 0;
+  function frame(){
+    ctx.clearRect(0, 0, W, H);
+    t += 0.016;
+
+    if(!dragging){
+      rotY += velY; rotX += velX;
+      velY *= 0.98; velX *= 0.96;
+      rotY += 0.008;
+      rotX = 0.18 + Math.sin(t * 0.4) * 0.06;
+    }
+
+    for(const p of particles){
+      p.angle += p.speed; p.y += p.vy;
+      if(Math.abs(p.y) > 80) p.vy *= -1;
+    }
+
+    trailFrames.push({ ry: rotY, rx: rotX });
+    if(trailFrames.length > TRAIL_COUNT * 3) trailFrames.shift();
+
+    for(let i=0; i<TRAIL_COUNT; i++){
+      const idx = trailFrames.length - 1 - i * 3;
+      if(idx < 0) continue;
+      const tf = trailFrames[idx];
+      const savedRY = rotY, savedRX = rotX;
+      rotY = tf.ry; rotX = tf.rx;
+      drawTextPoints((TRAIL_COUNT - i) / TRAIL_COUNT * 0.18);
+      rotY = savedRY; rotX = savedRX;
+    }
+
+    drawOrbitRing(1);
+    drawParticles(1);
+    drawTextPoints(1);
+
+    const cg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, 12);
+    cg.addColorStop(0, 'rgba(37,99,235,.5)');
+    cg.addColorStop(1, 'rgba(37,99,235,0)');
+    ctx.beginPath(); ctx.arc(W/2, H/2, 12, 0, Math.PI*2);
+    ctx.fillStyle = cg; ctx.fill();
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+
+  function getXY(e){ return e.touches ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : { x: e.clientX, y: e.clientY }; }
+  canvas.addEventListener('mousedown', e=>{ dragging=true; const p=getXY(e); lastX=p.x; lastY=p.y; });
+  canvas.addEventListener('touchstart', e=>{ dragging=true; const p=getXY(e); lastX=p.x; lastY=p.y; e.preventDefault(); },{passive:false});
+  window.addEventListener('mousemove', e=>{ if(!dragging) return; const p=getXY(e); velY+=(p.x-lastX)*.006; velX+=(p.y-lastY)*.004; lastX=p.x; lastY=p.y; });
+  window.addEventListener('touchmove', e=>{ if(!dragging) return; const p=getXY(e); velY+=(p.x-lastX)*.006; velX+=(p.y-lastY)*.004; lastX=p.x; lastY=p.y; e.preventDefault(); },{passive:false});
+  window.addEventListener('mouseup',  ()=>dragging=false);
+  window.addEventListener('touchend', ()=>dragging=false);
+})();
 </script>
 </body>
 </html>
